@@ -35,11 +35,8 @@ var web_sockets = [];
 
 io.on('connection', function(socket) {
       web_sockets.push(socket)
-      socket.emit('marker', {latitud: '16.626944', longitud: ' -93.100212'});
-      socket.on('location', function(data){
-        console.log("LATITUD: ", data.latitud, "LONGITUD: ", data.longitud);
-        socket.emit('marker', {latitud: data.longitud, longitud: data.longitud});
-      });
+      socket.emit('msg', {latitud: '16.626944', longitud: ' -93.100212'});
+      
       
     socket.on('disconnect', function() {
           var idx = web_sockets.indexOf(socket);
