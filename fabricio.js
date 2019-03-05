@@ -22,7 +22,7 @@ for (var k in interfaces) {
 
 var HOST = '134.209.76.81';
 var PORT = 1009;
-server.listen(0009);
+server.listen(5009);
 var arr;
 var arr1;
 var global_imei="";
@@ -35,6 +35,11 @@ var web_sockets = [];
 
 io.on('connection', function(socket) {
       web_sockets.push(socket)
+      socket.emit('marker', {latitud: '16.626944', longitud: ' -93.100212'});
+      socket.on('location', function(data){
+        console.log("LATITUD: ", data.latitud, "LONGITUD: ", data.longitud);
+        socket.emit('marker', {latitud: data.longitud, longitud: data.longitud});
+      });
       
     socket.on('disconnect', function() {
           var idx = web_sockets.indexOf(socket);
